@@ -5,6 +5,7 @@ import com.example.sec.kill.dal.dao.PayOrderMapper;
 import com.example.sec.kill.service.PayOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2020-05-05
  */
 @Service
+@Transactional
 public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> implements PayOrderService {
 
 }

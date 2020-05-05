@@ -1,0 +1,8 @@
+server:
+  port: 11001
+  servlet:
+    context-path: /sec-kill
+
+spring:
+  profiles:
+    active: dev

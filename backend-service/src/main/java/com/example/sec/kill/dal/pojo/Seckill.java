@@ -2,8 +2,12 @@ package com.example.sec.kill.dal.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -13,6 +17,8 @@ import java.io.Serializable;
  * @author dingrui
  * @since 2020-05-05
  */
+@Data
+@Accessors
 public class Seckill implements Serializable {
 
     private static final long serialVersionUID=1L;
@@ -36,76 +42,19 @@ public class Seckill implements Serializable {
     /**
      * 秒杀开启时间
      */
-    private LocalDateTime startTime;
+    private Date startTime;
 
     /**
      * 秒杀结束时间
      */
-    private LocalDateTime endTime;
+    private Date endTime;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     private Long version;
-
-
-    public Long getSeckillId() {
-        return seckillId;
-    }
-
-    public void setSeckillId(Long seckillId) {
-        this.seckillId = seckillId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Integer inventory) {
-        this.inventory = inventory;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
 
     @Override
     public String toString() {
