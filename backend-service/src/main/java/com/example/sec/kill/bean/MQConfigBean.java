@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @Author: dingrui
  * @Date: Create in 2020/5/6
- * @Description: RabbitMQ集群配置
+ * @Description: RabbitMQ集群配置 存储从配置文件读取的配置项
  */
 @Data
 @Builder

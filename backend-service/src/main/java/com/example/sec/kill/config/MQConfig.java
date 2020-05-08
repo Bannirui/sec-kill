@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * @Author: dingrui
  * @Date: Create in 2020/5/6
- * @Description:
+ * @Description: RabbitMQ配置项 从配置文件中读取
  */
 @Slf4j
 @Configuration
@@ -76,7 +76,7 @@ public class MQConfig {
                 .build();
     }
 
-    @Bean("mqConnectionSecKill")
+    @Bean
     public Connection mqConnectionSecKill(@Autowired MQConfigBean mqConfigBean) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         // 用户名
@@ -89,7 +89,7 @@ public class MQConfig {
         return factory.newConnection(mqConfigBean.getAddressList());
     }
 
-    @Bean("mqConnectionReceive")
+    @Bean
     public Connection mqConnectionReceive(@Autowired MQConfigBean mqConfigBean) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         //用户名

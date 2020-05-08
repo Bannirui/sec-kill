@@ -27,14 +27,16 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class MQConsumer {
-    private final MQConfigBean mqConfigBean;
+    @Resource
+    private MQConfigBean mqConfigBean;
+
     @Resource
     private SecKillService secKillService;
-    @Resource(name = "mqConnectionReceive")
+
     private Connection mqConnectionReceive;
-    @Resource(name = "initJedisPool")
+
+    @Resource
     private JedisPool jedisPool;
 
     public void receive() {

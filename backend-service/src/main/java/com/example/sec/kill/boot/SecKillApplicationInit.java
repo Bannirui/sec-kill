@@ -22,13 +22,13 @@ import java.util.List;
 /**
  * @Author: dingrui
  * @Date: Create in 2020/5/5
- * @Description:
+ * @Description: 项目初始化工作
  */
 @Slf4j
 @Component
 public class SecKillApplicationInit implements CommandLineRunner {
 
-    @Resource(name = "initJedisPool")
+    @Resource
     private JedisPool jedisPool;
 
     @Resource
@@ -62,8 +62,7 @@ public class SecKillApplicationInit implements CommandLineRunner {
             jedis.sadd(RedisKey.SECKILL_ID_SET, secKill.getId() + "");
 
             String inventoryKey = RedisKeyPrefix.SECKILL_INVENTORY + secKill.getId();
-            String setReply = jedis.set(inventoryKey, String.valueOf(secKill.getInventory()));
-            System.out.println("=======>" + setReply);
+            jedis.set(inventoryKey, String.valueOf(secKill.getInventory()));
 
             String secKillGoodsKey = RedisKeyPrefix.SECKILL_GOODS + secKill.getId();
             byte[] goodsBytes = ProtostuffIOUtil.toByteArray(secKill, MyRuntimeSchema.getInstance().getGoodsRuntimeSchema(),

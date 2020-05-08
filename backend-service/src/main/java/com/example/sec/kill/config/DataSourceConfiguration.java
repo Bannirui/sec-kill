@@ -19,6 +19,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 import java.io.IOException;
 
+/**
+ * @Author: dingrui
+ * @Date: Create in 2020/5/5
+ * @Description: 数据源配置
+ */
 @Slf4j
 @Data
 @Configuration
@@ -74,7 +79,7 @@ public class DataSourceConfiguration {
 
 
     @Bean
-    @Primary  //在同样的DataSource中，首先使用被标注的DataSource
+    @Primary  // 在同样的DataSource中，首先使用被标注的DataSource
     public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(url);

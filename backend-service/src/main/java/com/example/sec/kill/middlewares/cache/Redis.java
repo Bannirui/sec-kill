@@ -26,7 +26,7 @@ import java.util.Set;
 @Slf4j
 @Repository
 public class Redis {
-    @Resource(name = "initJedisPool")
+    @Resource
     private JedisPool jedisPool;
 
     private RuntimeSchema<SecKill> schema = MyRuntimeSchema.getInstance().getGoodsRuntimeSchema();

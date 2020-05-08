@@ -63,7 +63,7 @@ public class SecKillServiceImpl extends ServiceImpl<SecKillMapper, SecKill> impl
     @Value("${sec-kill.salt}")
     private String salt;
 
-    @Resource(name = "initJedisPool")
+    @Resource
     private JedisPool jedisPool;
 
     /**

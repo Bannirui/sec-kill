@@ -24,14 +24,15 @@ import java.util.concurrent.TimeoutException;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class MQProducer {
-    private final MQChannelManager mqChannelManager;
+    @Resource
+    private MQChannelManager mqChannelManager;
 
-    @Resource(name = "initJedisPool")
+    @Resource
     private JedisPool jedisPool;
 
-    private final MQConfigBean mqConfigBean;
+    @Resource
+    private MQConfigBean mqConfigBean;
 
     /**
      * 生产者 发送秒杀消息体

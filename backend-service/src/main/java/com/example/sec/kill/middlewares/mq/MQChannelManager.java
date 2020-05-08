@@ -18,19 +18,20 @@ import java.io.IOException;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class MQChannelManager {
 
-    @Resource(name = "mqConnectionSecKill")
-    private Connection connection;
+    // RabbitMQ生产者connection
+    @Resource
+    private Connection mqConnectionSecKill;
 
-    private final MQConfigBean mqConfigBean;
+    @Resource
+    private MQConfigBean mqConfigBean;
 
     private ThreadLocal<Channel> localSendChannel = new ThreadLocal<Channel>() {
         @Override
         public Channel initialValue() {
             try {
-                Channel channelInst = connection.createChannel();
+                Channel channelInst = mqConnectionSecKill.createChannel();
                 channelInst.queueDeclare(mqConfigBean.getQueue(), true, false, false, null);
                 return channelInst;
             } catch (IOException e) {
@@ -50,7 +51,7 @@ public class MQChannelManager {
         Channel channel = localSendChannel.get();
         if (channel == null) {
             try {
-                channel = connection.createChannel();
+                channel = mqConnectionSecKill.createChannel();
                 channel.queueDeclare(mqConfigBean.getQueue(), true, false, false, null);
                 localSendChannel.set(channel);
             } catch (IOException e) {

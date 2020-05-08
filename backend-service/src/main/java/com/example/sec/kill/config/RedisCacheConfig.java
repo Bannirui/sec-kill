@@ -1,6 +1,7 @@
 package com.example.sec.kill.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -8,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import javax.annotation.Resource;
 
 /**
  * @author dingrui
@@ -43,9 +46,9 @@ public class RedisCacheConfig {
     @Value("${spring.redis.jedis.pool.max-active}")
     private int maxActive;
 
-    @Bean(name = "poolConfig")
-    public JedisPoolConfig initJedisPoolConfig() {
-        log.info("[+] JedisPoolConfig注入开始:");
+    @Bean
+    public JedisPoolConfig jedisPoolConfig() {
+        log.info("[+] jedisPoolConfig注入开始:");
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(maxActive);
         poolConfig.setMaxIdle(maxIdle);
@@ -57,9 +60,9 @@ public class RedisCacheConfig {
         return poolConfig;
     }
 
-    @Bean(name = "initJedisPool")
-    public JedisPool initJedisPool(@Qualifier("poolConfig") JedisPoolConfig poolConfig) {
-        log.info("[+] JedisPool注入开始");
+    @Bean
+    public JedisPool jedisPool(@Autowired JedisPoolConfig poolConfig) {
+        log.info("[+] jedisPool注入开始");
         //  Redis无密码时候的处理
         if ("".equals(password)){
             password = null;
