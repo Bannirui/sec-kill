@@ -4,10 +4,32 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.sec.kill.dal.pojo.PayOrder">
-        <id column="seckill_id" property="seckillId" />
+        <id column="id" property="id" />
+        <result column="sec_kill_id" property="secKillId" />
         <result column="user_phone" property="userPhone" />
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
     </resultMap>
+
+    <sql id="Base_Column_List">
+        id, sec_kill_id, user_phone, state, create_time
+    </sql>
+
+    <select id="queryPayOrderByIdAndPhoneWithSecKill" resultMap="com.example.sec.kill.dal.dto.PayOrderWithSecKillDto">
+        select
+            so.sec_kill_id as sec_kill_id,
+            so.user_phone as user_phone,
+            so.create_time as create_time,
+            so.state as state,
+            s.name as name,
+            s.inventory as inventory,
+            s.start_time as start_time,
+            s.end_time as end_time,
+            s.create_time as create_time
+        from pay_order so
+        inner join seckill s
+        on so.seckill_id = s.id
+        where so.seckill_id=#{secKillId, jdbcType=BIGINT} and so.user_phone=#{userPhone, jdbcType=BIGINT}
+    </select>
 
 </mapper>

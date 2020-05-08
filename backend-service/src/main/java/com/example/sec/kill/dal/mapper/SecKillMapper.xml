@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.sec.kill.dal.dao.SeckillMapper">
+<mapper namespace="com.example.sec.kill.dal.dao.SecKillMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.example.sec.kill.dal.pojo.Seckill">
-        <id column="seckill_id" property="seckillId" />
+    <resultMap id="BaseResultMap" type="com.example.sec.kill.dal.pojo.SecKill">
+        <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="inventory" property="inventory" />
         <result column="start_time" property="startTime" />
@@ -12,5 +12,14 @@
         <result column="create_time" property="createTime" />
         <result column="version" property="version" />
     </resultMap>
+
+    <update id="reduceInventory" parameterMap="BaseResultMap">
+        update
+            seckill
+        set inventory = inventory-1,
+            version = version+1
+        where id = #{id, jdbcType=BIGINT}
+        and version = #{version, jdbcType=BIGINT};
+    </update>
 
 </mapper>

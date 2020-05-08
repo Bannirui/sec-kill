@@ -17,13 +17,7 @@ import org.springframework.stereotype.Service;
 public class AccessLimitServiceImpl implements AccessLimitService {
 
     @Value("${sec-kill.rate-limit}")
-    private final Long rateLimit;
-
-    /**
-     * 限速令牌
-     * 每秒发放rateLimit个令牌 拿到令牌的请求才可以进入秒杀过程
-     */
-    private RateLimiter rateLimiter = RateLimiter.create(rateLimit);
+    private Long rateLimit;
 
     /**
      * 尝试获取限速令牌
@@ -31,6 +25,8 @@ public class AccessLimitServiceImpl implements AccessLimitService {
      */
     @Override
     public boolean tryAcquireSecKill() {
+        // 每秒发放rateLimit个令牌 拿到令牌的请求才可以进入秒杀过程
+        RateLimiter rateLimiter = RateLimiter.create(rateLimit);
         return rateLimiter.tryAcquire();
     }
 }

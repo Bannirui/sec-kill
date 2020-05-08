@@ -18,12 +18,34 @@ spring:
     pool-prepared-statements: true
     max-pool-prepared-statement-per-connection-size: 20
 
+  redis:
+    database: 4
+    host: 127.0.0.1
+    port: 6379
+    password: 19920308
+    timeout: 0
+    jedis:
+      pool:
+        max-active: 3000
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #logging:
 #  config: classpath:log4j2.xml
+
+rabbitmq:
+  # 逗号分隔符
+  address-list: localhost:5672
+  username: root
+  password: 19920308
+  publisher-confirms: true
+  virtual-host: /
+  queue: secKill
 
 sec-kill:
   salt: aksksks*&&^%%aaaa&^^%%*

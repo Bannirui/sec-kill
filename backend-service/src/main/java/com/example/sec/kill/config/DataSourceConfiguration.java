@@ -22,7 +22,6 @@ import java.io.IOException;
 @Slf4j
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource")
 public class DataSourceConfiguration {
 
     @Value("${spring.datasource.url}")

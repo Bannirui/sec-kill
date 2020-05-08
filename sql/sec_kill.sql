@@ -16,18 +16,19 @@ Date: 2019-02-24 21:50:58
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for seckill
+-- Table structure for sec_kill
 -- ----------------------------
-DROP TABLE IF EXISTS `seckill`;
-CREATE TABLE `seckill` (
-  `seckill_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品库存id',
+DROP TABLE IF EXISTS `sec_kill`;
+CREATE TABLE `sec_kill` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品库存id',
   `name` varchar(120) CHARACTER SET utf8 NOT NULL COMMENT '商品名称',
   `inventory` int(11) NOT NULL COMMENT '库存数量',
   `start_time` datetime NOT NULL COMMENT '秒杀开启时间',
   `end_time` datetime NOT NULL COMMENT '秒杀结束时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
-  `version` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`seckill_id`)
+  `version` bigint(20) NOT NULL DEFAULT '0' COMMENT '版本号用于数据表实现乐观锁',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_Name` (`name`) USING BTREE COMMENT '商品名唯一索引'
 ) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8mb4 COMMENT='秒杀库存表';
 
 -- ----------------------------
